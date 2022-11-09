@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+
+const posts = [
+    {title: 'post one', body: 'this is post one', createdAt: new Date().getTime()},
+    {title: 'post two', body: 'this is post two', createdAt: new Date().getTime()}
+]   
+let intervalId = 0;
+
+function getPost(){
+
+   clearInterval(intervalId)
+    intervalId = setInterval(()=> {
+        
+        let output = ''
+        posts.forEach((post,i)=>{
+            output += `<li>${post.title} created ${(new Date().getTime() - posts[i].createdAt) / 1000} seconds ago</li>`
+        })
+        document.body.innerHTML = output
+        // console.log(output)
+    },1000)
+}
+
+function createPost(post){
+    return new Promise((resolve, reject)=>{
+
+        setTimeout(() => {
+
+        posts.push(post);
+        console.log(post)
+        const error = false;
+
+        if(!error){
+        resolve(post.createdAt)
+        }else{
+        reject('Error !!!');
+        }
+
+        }, 2000)
+
+    })
+   
+}
+
+// Delete post
+// function deletepost(post){
+    
+
+//     return new Promise((resolve,reject)=> {
+        
+//     setTimeout(()=>{
+//         if(posts.length > 0){
+//             resolve(posts.pop())
+//         } else {
+//             reject('Array is empty')
+//         }
+//         },1000)
+    
+       
+//     })
+// }
+
+
+
+const user = {
+    username : "Ankit",
+    lastActivityTime : '9 Nov 2022'
+}
+
+//UPDATE POST
+function updateLastUserActivityTime()
+{
+    return new Promise((resolve,reject)=>
+    {
+     setTimeout(() => 
+     {
+     user.lastActivityTime = new Date().getTime();
+     console.log(user.lastActivityTime + "last")
+        resolve(user.lastActivityTime)
+      },1000);
+       
+    })
+}
+
+// function creatFourtPost(post, callback){
+//     setTimeout(() => {
+
+//         posts.push({...post, createdAt: new Date().getTime()});
+
+//         callback()
+
+//     }, 4000);
+// }
+
+// getPost()
+
+// createPost({title:"post Three", body:"this is post three"})
+// .then(() => {
+//     getPost()
+//     deletepost().then((deletingitems)=>{
+//         console.log(deletingitems)
+//         getPost();
+//         deletepost().then(()=>{
+//             getPost();
+//             deletepost().then(()=>{
+//                 getPost()
+//                 deletepost().then(()=>{})
+//                 .catch((err)=>{console.log(err)})
+//             })
+//         }).catch((err)=>{console.log(err)})
+//     }).catch((err)=>{console.log(err)})
+// })
+
+
+createPost({title:"post four", body:"this is post four"})
+
+Promise.all([createPost({title:"post Three", body:"this is post three",createdAt: new Date()}),updateLastUserActivityTime()])
+.then(([createPostResolve, updateLastUserActivityTimeResolve])=>{
+    console.log(`Before creatingpost 4, user last activity time ->${createPostResolve}`)
+    console.log(`After creatingpost 4, user last activity time ->${updateLastUserActivityTimeResolve}`)
+})
+
+    // .catch(err => console.log(err)).then(deletepost).catch(err => console.log(err)).then(deletepost).then(deletepost)
+// creatFourtPost({title:"post Four", body:"this is post four"}, getPost)
+// creatFourtPost({title:"post five", body:"this is post five"},getPost)
+
+
+    </script>
+</body>
+</html>

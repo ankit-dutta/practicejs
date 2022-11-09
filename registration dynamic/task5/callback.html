@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+
+const posts = [
+    {title: 'post one', body: 'this is post one', createdAt: new Date().getTime},
+    {title: 'post two', body: 'this is post two', createdAt: new Date().getTime}
+]
+let intervalId = 0;
+
+function getPost(){
+
+   clearInterval(intervalId)
+    intervalId = setInterval(()=> {
+        
+        let output = ''
+        posts.forEach((post,i)=>{
+            output += `<li>${post.title} created ${(new Date().getTime() - posts[i].createdAt) / 1000} seconds ago</li>`
+        })
+        document.body.innerHTML = output
+        // console.log(output)
+    },1000)
+}
+
+function createPost(post, callback){
+   setTimeout(() => {
+
+    posts.push({...post, createdAt: new Date().getTime()});
+
+    callback();
+
+   }, 2000)
+}
+
+function creatFourtPost(post, callback){
+    setTimeout(() => {
+
+        posts.push({...post, createdAt: new Date().getTime()});
+
+        callback()
+
+    }, 4000);
+}
+
+// getPost()
+
+createPost({title:"post Three", body:"this is post three"}, getPost)
+creatFourtPost({title:"post Four", body:"this is post four"}, getPost)
+// creatFourtPost({title:"post five", body:"this is post five"},getPost)
+
+
+    </script>
+</body>
+</html>
