@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>promise with example !!</h1>
+    <script>
+
+//USING CALLBACKS - ITS VERY DIFFICULT TO USE WEHENEVER OUR ADDNG FUNCTION WE HAVE TO CHANGE THE CODE AND OUR CODE BECOME COMPLEX
+//WE HAVE TO MODIFY AGAIN AND AGAIN
+        // function makingTea(cb1,cb2){
+        //     setTimeout(()=>{
+        //         console.log("making tea")
+        //         cb1(cb2)
+        //     },5000)
+           
+        // }
+
+        // function addMilk(cb){
+        //     setTimeout(()=>{
+        //         console.log("addmilk ")
+        //         cb()
+        //     },2000)
+            
+        // }
+
+        // function boil(){
+        //     setTimeout(()=>{
+        //         console.log("boiling")
+        //     },1000)
+        
+        // }
+
+        // makingTea(addMilk ,boil)
+
+
+// PROMISE - using promise we have to write again and again .then for simple use we can use with async await for make code easy redable
+//A Promise is in one of these states:
+// pending: initial state, neither fulfilled nor rejected.
+// fulfilled: meaning that the operation was completed successfully.
+// rejected: meaning that the operation failed.
+
+// function makingTea(){
+//     return new  Promise((res,rej)=>{
+
+//         setTimeout(()=>{
+//                 res("making tea")
+                
+//             },5000);
+
+//            });
+//         }
+
+//     function addMilk(){
+//          return new Promise((res,rej)=>{
+//             setTimeout(()=>{
+//                res("addmilk ")
+                
+//             },2000)
+//         })
+//         }
+
+//         function boil(){
+//             return new Promise((res,rej)=>{
+//             setTimeout(()=>{
+//                 res("boiling")
+//             },1000)
+//             })
+//         }
+
+//         makingTea().then((msg1)=>{
+//             console.log(msg1)
+//             addMilk().then((msg2)=>{
+//                 console.log(msg2)
+//                 boil().then((msg3)=>{
+//                     console.log(msg3)
+//                 })
+//             })
+//         })
+
+
+//ASYNC AWAIT -The async and await keywords enable asynchronous, promise-based behavior to be written in a cleaner style, avoiding the need to explicitly configure promise chains.
+
+        function makingTea(){
+    return new  Promise((res,rej)=>{
+
+        setTimeout(()=>{
+              res("making tea")
+               
+            },5000);
+
+           });
+        }
+
+    function addMilk(){
+         return new Promise((res,rej)=>{
+            setTimeout(()=>{
+                res("addmilk ")
+              
+            },2000)
+        })
+        }
+
+        function boil(){
+            return new Promise((res,rej)=>{
+            setTimeout(()=>{
+                res("boiling")
+            },1000)
+            })
+        }
+
+        async function teaMethod()
+        {
+            try{
+            const msg1 = await makingTea();
+            console.log(msg1)
+            const msg2 = await addMilk();
+            console.log(msg2);
+            const msg3 = await boil()
+            console.log(msg3);
+        }catch(er){
+            console.log(err)
+        }
+    }
+        teaMethod()
+
+    </script>
+</body>
+</html>

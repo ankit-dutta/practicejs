@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        console.log('Person1 : show tickit')
+        console.log('Person2 : show tickit')
+
+        // USING PROMISE
+        // const friendBringMyTickit = new Promise((resolve,reject)=>{
+        //     setTimeout(()=>{
+        //         resolve('tickit')
+        //     },3000)
+        // })
+
+        // const getPopcorn = friendBringMyTickit.then((t)=>{
+        //     console.log('friend: Here is the tickit')
+        //     console.log('Me:we should go in')
+        //     console.log('friend: No i am hungry')
+        //     return new Promise((resolve,reject)=>{resolve(`${t} popcorn`)});
+        // });
+
+        // const getButter = getPopcorn.then((t )=>{
+        //     console.log('Me:we should go in')
+        //     console.log('friend: I need butter')
+        //     return new Promise((resolve,reject)=>{resolve(`${t} butter`)});
+        // })
+        // friendBringMyTickit.then((t)=>console.log(`person3 : show ${t}`))
+
+
+        // ASYNC AWAIT
+        const preMovie = async() =>
+          {
+         
+            const friendBringMyTickit = new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve('tickit')
+            },3000)
+          })
+          
+          const getPopcorn= new Promise((resolve,reject)=> resolve('popcorn'))
+          const addButter= new Promise((resolve,reject)=> resolve('butter'))
+          const getColdDrinks = new Promise((resolve,reject)=>resolve("coldrink"))
+
+          let tickit
+          try{
+             tickit = await friendBringMyTickit
+
+            console.log(`friend: Here is the ${tickit}`)
+            console.log('Me:we should go in')
+            console.log('friend: No i am hungry')
+
+            let popcorn = await getPopcorn
+
+            console.log(`Me: i got some ${popcorn}`)
+            console.log('Me: we should go in')
+            console.log('friend: I need butter')
+
+            let butter = await addButter
+            console.log(`Me: i got some ${butter} on popcorn`)
+            console.log('Me:anything else')
+            console.log('friend: Please order onecoldrink')
+
+            let coldrink = await getColdDrinks
+            console.log(`Me: i got some ${coldrink} for you`)
+            console.log('Me:anything else')
+            console.log('friend: No lets go in')
+
+          }catch(e){
+            tickit = 'sad face'
+          }
+         
+          return tickit
+          }
+
+        preMovie().then((m)=>console.log(`person3: shows ${m}` ));
+        console.log('Person4 : show tickit')
+        console.log('Person5 : show tickit')
+
+
+        //PROMISE ALL ASYNC
+
+        const testUserForm = async()=>{
+        const loadUserForm = new Promise((resolve, reject)=> {
+            setTimeout(() => resolve('page loaded'),3000)
+        });
+
+        const enterUserName = new Promise((resolve,reject)=>{
+            setTimeout(()=>resolve('user entered'),3000)
+        });
+
+        const verifyUserDetails = ()=>{
+        };
+
+    
+        await loadUserForm;
+        await enterUserName
+        const testResult = verifyUserDetails()
+
+        return testResult
+    }
+    </script>
+</body>
+</html>
